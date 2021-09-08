@@ -1,19 +1,15 @@
-from bs4 import BeautifulSoup as bs
-import requests as req
-import json as js
+import requests
+import json
 from flask import Flask
 
 url = "http://www.sanzstore.org/api/covid"
-html = req.get(url).text
-json = js.loads(html)
-positif = json["result"]["positif"]
-meninggal = json["result"]["meninggal"]
-sembuh = json["result"]["sembuh"]
-print(positif)
-print(meninggal)
-print(sembuh)
+html = requests.get(url).text
+raw = json.loads(html)
+positif = raw["result"]["positif"]
+meninggal = raw["result"]["meninggal"]
+sembuh = raw["result"]["sembuh"]
 
-json_data = {
+data = {
     "positif":positif,
     "meninggal":meninggal,
     "sembuh":sembuh
@@ -21,10 +17,9 @@ json_data = {
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def hello_world():
-    return json_data
+    return data
 
 if __name__ == '__main__':
     app.run()
