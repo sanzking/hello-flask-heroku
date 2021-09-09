@@ -56,10 +56,35 @@ def ds(keyword):
 		    }
 		}
 		b = json.dumps(data, indent=4)
-		response = make_response(b)
-		response.headers['Content-Type'] = 'application/json; charset=utf-8'
-		response.headers['mimetype'] = 'application/json'
-		return response
-		
+		drakorst = make_response(b)
+		drakorst.headers['Content-Type'] = 'application/json; charset=utf-8'
+		drakorst.headers['mimetype'] = 'application/json'
+		return drakorst
+
+@app.route('/api/covid', methods=['GET', 'POST'])
+def covid():
+	url = "http://www.sanzstore.org/api/covid"
+	html = req.get(url).text
+	json = js.loads(html)
+	positif = json["result"]["positif"]
+	meninggal = json["result"]["meninggal"]
+	sembuh = json["result"]["sembuh"]
+
+	data_covid = {
+		"creator":"sanzking",
+		"status":200,
+		"result":{
+    		"positif":positif,
+   		 "meninggal":meninggal,
+    		"sembuh":sembuh
+   	 }
+	}
+
+	cv = json.dumps(data_covid, indent=4)
+	cvd = make_response(cv)
+	cvd.headers['Content-Type'] = 'application/json; charset=utf-8'
+	cvd.headers['mimetype'] = 'application/json'
+	return cvd
+	
 if __name__ == '__main__':
     app.run(debug=True)
