@@ -65,7 +65,7 @@ def ds(keyword):
 def covid():
 	url = "http://www.sanzstore.org/api/covid"
 	html = req.get(url).text
-	json = js.loads(html)
+	json = json.loads(html)
 	positif = json["result"]["positif"]
 	meninggal = json["result"]["meninggal"]
 	sembuh = json["result"]["sembuh"]
