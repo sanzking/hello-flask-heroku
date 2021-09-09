@@ -61,14 +61,14 @@ def ds(keyword):
 		drakorst.headers['mimetype'] = 'application/json'
 		return drakorst
 
-@app.route('/api/covid', methods=['GET', 'POST'])
+@app.route('/api/covid')
 def covid():
 	url = "http://www.sanzstore.org/api/covid"
 	html = req.get(url).text
-	json = json.loads(html)
-	positif = json["result"]["positif"]
-	meninggal = json["result"]["meninggal"]
-	sembuh = json["result"]["sembuh"]
+	js = json.loads(html)
+	positif = js["result"]["positif"]
+	meninggal = js["result"]["meninggal"]
+	sembuh = js["result"]["sembuh"]
 
 	data_covid = {
 		"creator":"sanzking",
