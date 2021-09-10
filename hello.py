@@ -10,35 +10,103 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/api/filmapik/new_movie')
-def filmapik():
-    url = "https://filmapik.world/"
-    r = req.get(url)
-    soup = bs(r.content, 'html.parser')
-    container = soup.find('div', attrs = {'id':'main'}).find('div', class_='container').find('div', class_='main-content').find('div', class_='movies-list-wrap').find('div', class_='tab-content').find('div', class_='movies-list').findAll('div', class_='ml-item')
-    for i in range(len(container)):
-        res = container[i]
-        link = res.find('a')['href']
-        resolusi = res.find('a').find('span', class_='mli-quality').text
-        tumbnail = res.find('a').find('img')['data-original']
-        rating = res.find('a').find('span', class_='mli-rating').text
-        judul = res.find('a').find('span', class_='mli-info').find('h2').text
+@app.route('/scan/umsida', methods=['GET', 'POST'])
+def asu():
+    return render_template('asu.html')
+
+@app.route('/scan/umsida/result', methods=['GET', 'POST'])
+def run():
+    if request.method == 'POST':
+        x = request.form['akun']
+        data = x.strip()
+        user = data.split(':')[0]
+        pwsd = data.split(':')[1]
+        return umsida(user, pwsd)
+
+def umsida(usr,pwd):
+    s = req.Session()
+    url = 'https://sim.umsida.ac.id/'
+    raw = s.get(url).text
+    tok = bs(raw, 'html.parser').findAll('input')[2]['value']
+    dat = {
+        'username':usr,
+        'password':pwd,
+        'lgndim':tok,
+        'submit':'submit'
+    }
+    post = s.post(url, data=dat).text
+    if 'Login' in post:
         data = {
-            "status":200,
-            "creator":"sanzking",
-            "result":{
-                "judul":judul,
-                "tumbnail":tumbnail,
-                "resolusi":resolusi,
-                "rating":rating,
-                "link":link
+            'creator':'sanzking',
+            'univ':'umsida',
+            'result':{
+                'status':'gagal',
+                'user':usr,
+                'pass':pwd
             }
         }
-        b = json.dumps(data, indent=4)
-        drakorst = make_response(b)
-        drakorst.headers['Content-Type'] = 'application/json; charset=utf-8'
-        drakorst.headers['mimetype'] = 'application/json'
-        return drakorst
+        cv = json.dumps(data, indent=4)
+        cvd = make_response(cv)
+        cvd.headers['Content-Type'] = 'application/json; charset=utf-8'
+        cvd.headers['mimetype'] = 'application/json'
+        return cvd
+    else:
+        data = {
+            'creator':'sanzking',
+            'univ':'umsida',
+            'result':{
+                'status':'sukses',
+                'user':usr,
+                'pass':pwd
+            }
+        }
+        cv = json.dumps(data, indent=4)
+        cvd = make_response(cv)
+        cvd.headers['Content-Type'] = 'application/json; charset=utf-8'
+        cvd.headers['mimetype'] = 'application/json'
+        return cvd
+        
+
+@app.route('/api/filmapik/new_movie')
+def filmapik():
+    url = "https://api-sanz.herokuapp.com/api/filmapik/terbaru?apikey=sanzking"
+    html = req.get(url).text
+    js = json.loads(html)
+    res = js["result"]["result"]
+    for i in range(len(res)):
+        data = res[i]
+        judul = data['title']
+        rating = data['rating']
+        kualitas = data['quality']
+        trailer = data['detail']['trailer']
+        genre = data['detail']['genre']
+        cast = data['detail']['actors']
+        negara = data['detail']['country']
+        tahun = data['detail']['release']
+        tumbnail = data['detail']['thumbnailLandscape']
+        sinopsis = data['detail']['description']
+    
+        data_covid = {
+            "creator":"sanzking",
+            "status":200,
+            "result":{
+                "judul":judul,
+                "rating":rating,
+                "kualitas":kualitas,
+                "trailer":trailer,
+                "genre":genre,
+                "cast":cast,
+                "negara":negara,
+                "tahun":tahun,
+                "sinopsis":sinopsis
+            }
+        }
+
+        cv = json.dumps(data_covid, indent=4)
+        cvd = make_response(cv)
+        cvd.headers['Content-Type'] = 'application/json; charset=utf-8'
+        cvd.headers['mimetype'] = 'application/json'
+        return cvd
 
 @app.route('/api/dramaindo', methods=['GET', 'POST'])
 def dramaindo():
@@ -156,9 +224,9 @@ def covid():
         "status":200,
         "result":{
             "positif":positif,
-         "meninggal":meninggal,
+            "meninggal":meninggal,
             "sembuh":sembuh
-     }
+        }
     }
 
     cv = json.dumps(data_covid, indent=4)
