@@ -2,4 +2,3 @@ flask
 gunicorn
 requests
 bs4
-ftplib
