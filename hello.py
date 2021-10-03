@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, make_response
 import requests as req
 from bs4 import BeautifulSoup as  bs
 import json
+import ftplib
 
 
 app = Flask(__name__)
@@ -10,61 +11,23 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/scan/umsida', methods=['GET', 'POST'])
+@app.route('/akses', methods=['GET', 'POST'])
 def asu():
     return render_template('asu.html')
 
-@app.route('/scan/umsida/result', methods=['GET', 'POST'])
+@app.route('/akses/self', methods=['GET', 'POST'])
 def run():
     if request.method == 'POST':
-        x = request.form['akun']
-        data = x.strip()
-        user = data.split(':')[0]
-        pwsd = data.split(':')[1]
-        return umsida(user, pwsd)
+        x = request.form['nama']
+        return umsida(x)
 
-def umsida(usr,pwd):
-    s = req.Session()
-    url = 'https://sim.umsida.ac.id/'
-    raw = s.get(url).text
-    tok = bs(raw, 'html.parser').findAll('input')[2]['value']
-    dat = {
-        'username':usr,
-        'password':pwd,
-        'lgndim':tok,
-        'submit':'submit'
-    }
-    post = s.post(url, data=dat).text
-    if 'Login' in post:
-        data = {
-            'creator':'sanzking',
-            'univ':'umsida',
-            'result':{
-                'status':'gagal',
-                'user':usr,
-                'pass':pwd
-            }
-        }
-        cv = json.dumps(data, indent=4)
-        cvd = make_response(cv)
-        cvd.headers['Content-Type'] = 'application/json; charset=utf-8'
-        cvd.headers['mimetype'] = 'application/json'
-        return cvd
-    else:
-        data = {
-            'creator':'sanzking',
-            'univ':'umsida',
-            'result':{
-                'status':'sukses',
-                'user':usr,
-                'pass':pwd
-            }
-        }
-        cv = json.dumps(data, indent=4)
-        cvd = make_response(cv)
-        cvd.headers['Content-Type'] = 'application/json; charset=utf-8'
-        cvd.headers['mimetype'] = 'application/json'
-        return cvd
+def umsida(kode):
+    ftp = ftplib.FTP("files.000webhost.com")
+    ftp.login("sanzstore", "subang123")
+    ftp.cwd(f'/public_html/akses')
+    ftp.storbinary(f"STOR {kode}", file)
+    ftp.close()
+    return 'Akses sudah diberikan, selamat.'
         
 
 @app.route('/api/filmapik/new_movie')
