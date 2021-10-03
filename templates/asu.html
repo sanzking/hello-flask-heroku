@@ -4,14 +4,11 @@
 {% endblock head %}
 {% block content %}
 <div class="m-5 p-5 bg-primary shadow rounded" align="center">
-<h1 class="text-center fw-bold text-light">UMSIDA CHECKER</h1>
-<div class="mb-3 p-2 bg-danger fw bold text-warning text-center">
-	Untuk sekarang hanya work untuk per-akun! TESTER!!!
-</div>
+<h1 class="text-center fw-bold text-light">SANZ AKSES</h1>
 <div class="mb-3"> 
-<form action="/scan/umsida/result" method="POST" enctype="multipart/form-data">
-	<label class="mt-5 text-light fw-bold">Akun format [ user:pass ]</label>
-	<input type="text" name="akun" class="mb-3 form-control" placeholder="enter your account here">
+<form action="/akses" method="POST" enctype="multipart/form-data">
+	<label class="mt-5 text-light fw-bold">Kode akses</label>
+	<input type="text" name="nama" class="mb-3 form-control" placeholder="enter your account here">
 	<button class="btn btn-success" type="submit">Gaskeun</button>
 </form>
 </div>
