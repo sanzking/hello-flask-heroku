@@ -19,15 +19,24 @@ def asu():
 def run():
     if request.method == 'POST':
         x = request.form['nama']
-        return umsida(x)
+        y = request.form['pass']
+        return umsida(x, y)
 
-def umsida(kode):
-    ftp = ftplib.FTP("files.000webhost.com")
-    ftp.login("sanzstore", "subang123")
-    ftp.cwd(f'/public_html/akses')
-    ftp.storbinary(f"STOR {kode}", file)
-    ftp.close()
-    return 'Akses sudah diberikan, selamat.'
+def umsida(usr, pwd):
+    url = 'https://kkn.uii.ac.id/login.php'
+    x = {
+        "u":usr,
+        "p":pwd,
+        "submit":"submit"
+        }
+    post = req.post(url, data=x).url
+    if post.find('KKN-Status-Pendaftaran') != -1:
+        return 'Login sukses'
+        
+    else:
+        return 'Login gagal'
+        
+    
         
 
 @app.route('/api/filmapik/new_movie')
