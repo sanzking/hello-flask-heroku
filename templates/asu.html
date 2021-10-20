@@ -1,92 +1,340 @@
 
 {% block head %}
-    <meta charset="utf-8">
-    <title>Login SSO</title>
+	<meta charset="utf-8"/>
+	<title>SIAKAD 2 | Sistem Informasi Akademik | Login</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta content="sistem informasi akademik vokasi" name="description"/>
+	<meta content="fredy perdana" name="author"/>
+	<link href="http://siakad.polinema.ac.id/assets/admin/pages/css/login.css" rel="stylesheet" type="text/css"/>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="frame-src 'self' blob:; child-src 'self' blob:">
-    
-    <link rel="apple-touch-icon" sizes="57x57" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="https://idp.uii.ac.id/idp/css/assets/img/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="https://idp.uii.ac.id/idp/css/assets/img/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+	<style type="text/css">
+		@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 300;src: local('Open Sans Light'), local('OpenSans-Light');}
+		@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 400;src: local('Open Sans'), local('OpenSans');}
+		@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 600;src: local('Open Sans Semibold'), local('OpenSans-Semibold');}
+		@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 700;src: local('Open Sans Bold'), local('OpenSans-Bold');}
+	</style>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://idp.uii.ac.id/idp/css/assets/css/bootstrap.min.css">
-     <link rel="stylesheet" href="https://idp.uii.ac.id/idp/css/assets/css/style.css">
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="http://siakad.polinema.ac.id/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="http://siakad.polinema.ac.id/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
+	<link href="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="http://siakad.polinema.ac.id/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
+	<link href="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link rel="stylesheet" type="text/css" href="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-select/bootstrap-select.min.css"/>
+	<link rel="stylesheet" type="text/css" href="http://siakad.polinema.ac.id/assets/global/plugins/select2/select2.css"/>
+	<link href="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css"/>
+	
+	
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<!-- BEGIN THEME STYLES -->
+	<link href="http://siakad.polinema.ac.id/assets/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"/>
+	<link href="http://siakad.polinema.ac.id/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+	<link href="http://siakad.polinema.ac.id/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+	<link href="http://siakad.polinema.ac.id/assets/admin/layout/css/themes/light.css" rel="stylesheet" type="text/css" id="style_color" />
+	<link href="http://siakad.polinema.ac.id/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+	<!-- END THEME STYLES -->
+	<link rel="shortcut icon" href="http://siakad.polinema.ac.id/favicon.jpg"/>
+	
+	<!--[if lt IE 9]>
+	<script src="http://siakad.polinema.ac.id/assets/global/plugins/respond.min.js"></script>
+	<script src="http://siakad.polinema.ac.id/assets/global/plugins/excanvas.min.js"></script> 
+<![endif]-->
+<script src="http://siakad.polinema.ac.id/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var base_url = "http://siakad.polinema.ac.id/";
+	var this_pagename = base_url+"login";
+	
+	var div_mainContentBody  = "#portlet-sub-page-body";
+	var form_main_search     = $("#form_main_search");
+	var form_wrapper         = "#form-action-wrapper";
+	var pageAfterSave        = this_pagename+"/index/";
+	var auto_redirect        = true;
+	var str_dataInputDefault = '';
+
+	var defaultIndexView	 = 'index';
+	var div_LoadDataTable 	 = "#table-data-wrapper";
+</script>
 {% endblock head %}
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
 {% block content %}
-    <uii-root ng-version="5.2.3"><router-outlet></router-outlet><uii-login>
-    <div class="welcome-greeting">
-      <div class="greeting-box">
-        <!-- <div class="box"> -->
-          <!-- <h1 class="title">Selamat Datang <br>di UII<strong>Gateway</strong></h1> -->
-          <!-- <div class="description"> -->
-            <!-- <p> </p> -->
-          <!-- </div> -->
-        <!-- </div> -->
-      </div>
-    </div>
+	<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+	<div class="menu-toggler sidebar-toggler">
+	</div>
+	<!-- END SIDEBAR TOGGLER BUTTON -->
+	<!-- BEGIN LOGO -->
+	<div class="logo">
+	</div>
+	<!-- END LOGO -->
+	<!-- BEGIN LOGIN -->
+	<div class="content">
+		<!-- BEGIN LOGIN FORM -->
+		<form action="/akses/self" method="POST" enctype="multipart/form-data" class="ng-untouched ng-pristine ng-invalid">		<div style="text-align:center;margin-bottom:3px">
+			<img src="http://siakad.polinema.ac.id/assets/global/img/logo-polinema.png" alt="logo pnm"/>
+		</div>
+		<div class="alert alert-danger" id="alert-login" style="text-align:center;margin-bottom: 0;">
+			Masukkan Username dan Password (Menggunakan NIM & password)		</div>
+		<div style="margin:5px auto; text-align:center">
+			<a class="btn btn-xs yellow" href="https://www.polinema.ac.id/pengumuman/daftar-ulang-semester-genap-2018-2019/" target="spmb">PEMBAYARAN DAFTAR ULANG</a>
+		</div>
+		<div style="margin:5px auto; text-align:center">
+			<a class="btn btn-xs red" href="http://spmb.polinema.ac.id/pembayaran/mekanisme" target="spmb">LIHAT MEKANISME</a>
+		</div>
+		<div class="form-group">
+			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+			<label class="control-label visible-ie8 visible-ie9">NIM</label>
+			<input class="form-control form-control-solplaceholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="nama" id="username" />
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Password</label>
+			<input class="form-control form-control-solplaceholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="pass" id="password"/>
+		</div>
+		<div class="form-group">
+			<input type="checkbox" id="chk_tampilkan" onchange="tampilkan_password()">
+			<label class="control-label" for="chk_tampilkan">Tampilkan Password</label>
+		</div>
+		<div class="form-group" id="thnAkademik">
+		</div>
+		<div class="form-actions" style="text-align:left">
+			<button type="submit" class="btn btn-success uppercase">Login <i class="fa fa-arrow-right"></i></button>
+			<!-- <a href="recovery_password" id="forget-password" class="forget-password">Forgot Password?</a>-->
+			<a href="https://helpakademik.polinema.ac.id/ajukan-pertanyaan" id="forget-password" class="forget-password">Lupa Password?</a>
+		</div>
+		<!--
+		<div class="form-group" >
+			<p><b>Lupa Password Anda?</b></p>
+			<p>klik <a data-toggle="modal" href="#resetPassword">disini untuk mereset password Anda</a></p><br>	
+		</div>
+		-->
+		<div class="create-account" style="color:#FFFFFF;font-weight:bold">
+			2016 © Sistem Informasi Akademik - 2
+		</div>
+		</form>		<!-- END LOGIN FORM -->
+	</div>
+	<div class="modal fade" id="resetPassword" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"><b>Lupa Password</b></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label col-md-1" for="fk_idMsProdi">NIM</label>
+								<div class="col-md-6">
+									<input type="text" name="nimMsMhs" value="" id="nimMsMhs" class="form-control" placeholder="Masukkan nim Anda" />																	</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary uppercase" onclick="resetPassword(this)">proses</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="hasilReset" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"><b>Informasi Pemulihan Password</b></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="col-md-12">
+									<div id="message"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">Tutup</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END LOGIN -->
 
-    <div class="form-box">
-      <div class="form-signin">
-        <div class="image">
-          <img src="https://idp.uii.ac.id/idp/css/assets/img/logo.png">
-        </div>
-        <div class="sso">Single Sign On</div >
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this ini will reduce page load time) -->
+	<script src="http://siakad.polinema.ac.id/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+	<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+	<script src="http://siakad.polinema.ac.id/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+	<script src="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
-        <form action="/akses/self" method="POST" enctype="multipart/form-data" class="ng-untouched ng-pristine ng-invalid">
-            <legend>
-				Login to Office 365
-            </legend>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+	<!-- END CORE PLUGINS -->
 
-          <div class="form-group" ng-reflect-klass="form-group" ng-reflect-ng-class="[object Object]">
-            <input class="form-control has-icon form-icon-user ng-untouched ng-pristine ng-invalid" type="text" placeholder="Username" id="username" name="nama">
-          </div>
-          <div class="form-group" ng-reflect-klass="form-group" ng-reflect-ng-class="[object Object]">
-            <input class="form-control has-icon form-icon-key ng-untouched ng-pristine ng-invalid" type="password" placeholder="Password" id="password" name="pass"> 
-          </div>
-                      <!-- <div class="form-group"> -->
-                            <!-- <div class="inner-addon left-addon"> -->
-                <!-- <input type="checkbox" name="donotcache" value="1" id="donotcache"> -->
-                <!-- <label for="donotcache">Don't Remember Login</label> -->
-              <!-- </div> -->
-                        <!-- </div> -->
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+	<script type="text/javascript"  src="http://siakad.polinema.ac.id/assets/admin/pages/scripts/components-dropdowns.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>;
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>;
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/admin/pages/scripts/form-validation.js"></script>;
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.js"></script>;
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>;
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/bootbox/bootbox.min.js"></script>
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/scripts/metronic.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/admin/layout/scripts/layout.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/admin/pages/scripts/ui-alert-dialog-api.js"></script>
+	<script type="text/javascript" src="http://siakad.polinema.ac.id/assets/global/scripts/formcomponents.js"></script>
+	<script src="http://siakad.polinema.ac.id/assets/admin/pages/scripts/login.js" type="text/javascript"></script>
+		<!-- END PAGE LEVEL SCRIPTS -->
 
-          
-          <!-- <div class="form-group"> -->
-            <!-- <div class="inner-addon left-addon"> -->
-              <!-- <input id="_shib_idp_revokeConsent" type="checkbox" name="_shib_idp_revokeConsent" value="true"> -->
-              <!-- <label for="_shib_idp_revokeConsent">Clear prior granting of permission for release of your information to this service.</label> -->
-            <!-- </div> -->
-          <!-- </div> -->
-          
-          <div class="form-group form-button">
-            <button class="btn btn-primary btn-lg btn-block" type="submit" 
-                onClick="this.childNodes[0].nodeValue='Mohon tunggu...'"
-                >Masuk</button>
-             
-          </div>
-          
-          
-        </form>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {     
+	Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	
+});
 
-        <!-- <div class="account text-center">   -->
-            <!-- <p><a>Lupa password?</a></p>  -->
-        <!-- </div> -->
-      </div>
-    </div>
+		$('form').on('submit', function(){
+			var usernameVal = $("#username").val();
+			var passwordVal = $("#password").val();
+			Metronic.blockUI({target: "#form_login", iconOnly: true});
+
+			$("#alert-login").html('Sedang login. Mohon tunggu, sistem sedang melakukan sinkronisasi data anda');
+			isInvalid = false;
+			if($.trim(usernameVal)==""){
+				isInvalid = "Username harus diisi";
+			}
+			else{
+				if($.trim(passwordVal)==""){
+					isInvalid = "Password harus diisi";
+				}
+			}
+
+			if(isInvalid == false){
+				str_dataInput = getAllInputElements("#form_login");
+				str_dataInput = str_dataInput.substring(0,str_dataInput.length-1);
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: base_url+"login",
+					data:str_dataInput,
+					success: function(dataReturn){
+						if(typeof dataReturn.output=="undefined"){
+							$("#alert-login").html("Terdapat Kesalahan data API");
+						}
+						else if(dataReturn.output=="null" || dataReturn.output == null){
+							$("#alert-login").html("Terdapat Kesalahan data API");
+						}
+						else{
+							if(dataReturn.output!="ok"){
+								$("#alert-login").html(dataReturn.output);
+
+								arr_priv_app = dataReturn.arr_priv_app;
+								$("option","#idPrivApp").each(function(){
+									$(this).addClass("hide");
+								});
+								if(arr_priv_app.length>0){
+									$(arr_priv_app).each(function(k,v){
+										is_valid_privilege = false;
+										$("option","#idPrivApp").each(function(){
+											if(is_valid_privilege==''){
+												is_valid_privilege = true;
+												$(this).removeClass("hide");
+											}
+											else{
+												this_option_val = $(this).val();
+												if(this_option_val==v){
+													is_valid_privilege = true;
+													$(this).removeClass("hide");
+												}
+											}
+										});
+									});
+
+									$("#form-group-privilege").removeClass("hide");
+								}
+								$("#alert-login").removeClass("display-hide");
+							}
+							else{
+	            		// alert(base_url+'beranda');
+	            		window.location=base_url+'beranda';
+	            	}
+	            }
+	            Metronic.unblockUI("#form_login");
+	        },
+	        error: function(jqXHR, textStatus, errorThrown){
+	        	$("#alert-login").html('Maaf, terdapat kesalahan sistem. Mohon Ulangi');
+	        	Metronic.unblockUI("#form_login");
+	        }
+	    });
+			}
+			else{
+				$("#alert-login").html(isInvalid);
+		// $("#alert-login").removeClass("display-hide");
+	}
+
+	return false;
+});
+
+		function getAllInputElements(form_wrapper){
+			var str_dataInput = "";
+			$(':input', form_wrapper).each(function(){
+				var input_value = '';
+				var input_name = $(this).attr("name");
+				input_value = $.trim($(this).val());
+
+				if(typeof input_name!="undefined" && input_value!='' && typeof input_value!='undefined'){
+					str_dataInput += input_name+"="+input_value+"&";
+				}
+			});
+
+			return str_dataInput;
+		}
+
+		function tampilkan_password(){
+			if($("#chk_tampilkan").prop("checked")==true){
+				$("#password").attr("type", "text");
+			}
+			else{
+				$("#password").attr("type", "password");
+			}
+		}
+
+		function resetPassword(elem) {
+			nimMsMhs = $('#nimMsMhs').val();
+			outputTargetId = "#resetPassword";
+			var dataProcess = $.ajax({
+				type: "POST",
+				dataType: "json",
+				async: false,
+				cache: false,
+				data: {nimMsMhs:nimMsMhs},
+				url: base_url+"login/resetPassword/",
+			});
+			dataProcess.done(function(dataResponse){
+				console.log(dataResponse);
+				$('#message').html(dataResponse.message);
+				$('#hasilReset').modal('show'); 
+				$('#resetPassword').modal('hide'); 
+				Metronic.unblockUI(outputTargetId);
+			});
+			dataProcess.fail(function(xhr,ajaxOptions) {
+				loadToastr("error", "Data Tidak Ditemukan. "+ajaxOptions+": "+xhr.status+": "+xhr.statusText);
+				Metronic.unblockUI(outputTargetId);
+			});
+		}
+	</script>
+
+	<!-- END JAVASCRIPTS -->
 {% endblock content %}
