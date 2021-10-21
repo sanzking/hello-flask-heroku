@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, make_response
 import requests as req
 from bs4 import BeautifulSoup as  bs
 import json
+import urllib.request
 import ftplib
 
 
@@ -211,6 +212,53 @@ def covid():
     cvd.headers['Content-Type'] = 'application/json; charset=utf-8'
     cvd.headers['mimetype'] = 'application/json'
     return cvd
+
+@app.route('/api/lib', methods=['GET', 'POST'])
+def lib():
+    nama_lib = request.args['query']
+    return perpus(nama_lib)
+
+def perpus(keyword):
+    url = "https://id1lib.org/s/"
+    raw = urllib.request.urlopen(url+keyword)
+    source_code = raw.read()
+	res = bs(source_code, 'html.parser').find('div', {'id':'searchResultBox'}).findAll('div',{'class':'resItemBox'})
+	for i in res:
+	    a = i.find('table')
+	    c = a.find_all('tr')
+	    for tr in c:
+	        td = tr.find_all('td')
+	        td1 = td[0]
+	        z = td1.findAll('div',{'class':'itemCoverWrapper'})
+	        for it in range(len(z)):
+	            item = z[it]
+	            thub = item.find('img')['data-src']
+	            link = item.find('a')['href']
+	    raw2 = urllib.request.urlopen('https://id1lib.org'+link)
+	    source_code2 = raw2.read()
+	    res2 = bs(source_code2, 'html.parser')
+	    judul = res2.find('div', {'class':'cardBooks'}).find('h1').text
+	    gambar = res2.find('div', {'class':'cardBooks'}).find('img')['src']
+	    size = res2.find('div', {'class':'cardBooks'}).find('div', {'class':'bookDetailsBox'}).find('div', {'class':'property__file'}).find('div', {'class':'property_value'}).text
+	    bahasa = res2.find('div', {'class':'cardBooks'}).find('div', {'class':'bookDetailsBox'}).find('div', {'class':'property_language'}).find('div', {'class':'property_value'}).text
+	    download = res2.find('div', {'class':'details-buttons-container'}).findAll('div', {'class':'book-details-button'})[0].find('div', {'class':'btn-group'}).find('a')['href']
+	    title = judul.replace('                ','')
+        data = {
+            "status":200,
+            "creator":"sanzking",
+            "result":{
+                "judul":title,
+                "bahasa":bahasa,
+                "ukuran":size,
+                "cover":gambar,
+                "download":"https://id1lib.org"+download
+            }
+        }
+        b = json.dumps(data, indent=4)
+        response = make_response(b)
+        response.headers['Content-Type'] = 'application/json; charset=utf-8'
+        response.headers['mimetype'] = 'application/json'
+        return response
     
 if __name__ == '__main__':
     app.run(debug=True)
