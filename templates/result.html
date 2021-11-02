@@ -1,0 +1,47 @@
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+{% endblock head %}
+{% block content %}
+<body style="background-image: url('https://i.pinimg.com/originals/20/ae/f2/20aef23d39a8dcb74bf663ed89ab08d6.gif');">
+<div class="container">
+	<div class="row">
+		<div class="col"></div>
+		<div class="col-9 bg-light p-3 mt-5 rounded shadow border border-dark border-3" align="center">
+			<h5 class="text-center mb-3"><STRONG>FREE</STRONG> CPANEL & FTP</h5>
+			<table class="table table-responsive">
+				<tr>
+					<td class="text-success fw-bold" colspan="2"><i class="bi bi-patch-check-fill"></i> CPANEL ACCOUNT</td>
+				</tr>
+				<tr>
+					<td>Url Cpanel</td><td>http://{{dom}}/cpanel</td>
+				</tr>
+				<tr>
+					<td>Username Cpanel</td><td>{{dom}}</td>
+				</tr>
+				<tr>
+					<td>Password Cpanel</td><td>{{pw}}</td>
+				</tr>
+				<tr>
+					<td class="text-success fw-bold" colspan="2"><i class="bi bi-patch-check-fill"></i> FTP ACCOUNT</td>
+				</tr>
+				<tr>
+					<td>Url FTP</td><td>http://{{dom}}/ftp</td>
+				</tr>
+				<tr>
+					<td>Host FTP</td><td>{{dom}}</td>
+				</tr>
+				<tr>
+					<td>Username FTP</td><td>{{dom}}</td>
+				</tr>
+				<tr>
+					<td>Password FTP</td><td>{{pw}}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="col"></div>
+	</div>
+</div>
+</body>
+{% endblock content %}
